@@ -39,6 +39,7 @@ public class PortfolioAssistantRESTServiceTest extends AbstractIntegrationTest {
             @Claim(key = "iss", value = "http://stock-trader.ibm.com"),
             @Claim(key = "aud", value = "stock-trader")
     })
+
     void testGetEndpoint() {
         given()
                 .when().get("/")
