@@ -17,6 +17,7 @@
 package com.kyndryl.cjot.stocktrader.rest;
 
 import com.kyndryl.cjot.stocktrader.assistant.PortfolioAssistant;
+import io.micrometer.core.annotation.Timed;
 import io.smallrye.mutiny.Multi;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -38,6 +39,7 @@ public class PortfolioAssistantResource {
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     @RolesAllowed({"StockTrader", "StockViewer"})
+    @Timed(description = "Time needed chatting to the agent.")
     public String advice(String question) {
         return makeMeRichService.advice(question);
     }
@@ -46,6 +48,7 @@ public class PortfolioAssistantResource {
     @Path("/streaming")
     @Produces(MediaType.SERVER_SENT_EVENTS)
     @RolesAllowed({"StockTrader", "StockViewer"})
+    @Timed(description = "Time needed chatting to the agent.")
     public Multi<String> adviceStreaming(String question) {
         return makeMeRichService.adviceStreaming(question);
     }

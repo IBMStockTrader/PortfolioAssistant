@@ -18,6 +18,7 @@ package com.kyndryl.cjot.stocktrader.websocket;
 
 import com.kyndryl.cjot.stocktrader.assistant.PortfolioAssistant;
 import com.kyndryl.cjot.stocktrader.helpers.jwt.JwtContextHolder;
+import io.micrometer.core.annotation.Timed;
 import io.quarkus.security.Authenticated;
 import io.quarkus.websockets.next.*;
 import io.smallrye.jwt.auth.principal.JWTParser;
@@ -74,6 +75,7 @@ public class PortfolioAssistantWebSocket {
 
     @OnTextMessage
     @RolesAllowed({"StockTrader", "StockViewer"})
+    @Timed(description = "Time needed chatting to the agent.")
     public String onTextMessage(String question) {
         var result = assistant.advice(question);
         return result;
