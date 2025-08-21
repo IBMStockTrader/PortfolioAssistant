@@ -19,9 +19,11 @@ package com.kyndryl.cjot.stocktrader.rest;
 import com.kyndryl.cjot.stocktrader.assistant.PortfolioAssistant;
 import io.micrometer.core.annotation.Timed;
 import io.smallrye.mutiny.Multi;
+import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -35,6 +37,14 @@ public class PortfolioAssistantResource {
 
     @Inject
     PortfolioAssistant makeMeRichService;
+
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Timed(description = "Welcome")
+    @PermitAll
+    public String welcome() {
+        return "Welcome to Portfolio Assistant.";
+    }
 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
