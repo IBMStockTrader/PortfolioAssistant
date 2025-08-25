@@ -41,7 +41,7 @@ name: Build, Push to Azure ACR, Gitops
 on:
   push:
     branches:
-      - master
+      - main
     paths-ignore:
       - ".github/**"
   release:
