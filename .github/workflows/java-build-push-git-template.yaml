@@ -14,7 +14,7 @@ name: Build, Push, Gitops
 on:
   push:
     branches:
-      - master
+      - main
     paths-ignore:
       - '.github/**'
 
